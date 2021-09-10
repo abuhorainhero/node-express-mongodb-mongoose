@@ -1,0 +1,19 @@
+{
+  "name": "mongoose-test",
+  "version": "1.0.0",
+  "description": "This Project is Mongoose test && Practics",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "abu.horain20@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "http-errors": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.4"
+  }
+}
