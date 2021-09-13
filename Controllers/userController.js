@@ -53,7 +53,23 @@ const login = async (req, res, next) => {
   }
 };
 
+const getAll = async (req, res, next) => {
+  try {
+    const user = await User.find({})
+      .populate("products", "product type")
+      .select({ password: 0 });
+
+    res.status(200).json({
+      data: user,
+      message: `Get Successfully`,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   signUp,
   login,
+  getAll,
 };

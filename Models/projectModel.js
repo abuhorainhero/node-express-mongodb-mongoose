@@ -13,12 +13,23 @@ const productSchema = new Schema(
       trim: true,
       enum: ["boys", "girls"],
     },
+    user: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
+    },
   },
   {
     versionKey: false,
     timestamps: true,
   }
 );
+
+// instance Methods
+// productSchema.methods = {
+//   findTypes: function (type) {
+//     return this.find({ type: type });
+//   },
+// };
 
 const Product = mongoose.model("Product", productSchema);
 
