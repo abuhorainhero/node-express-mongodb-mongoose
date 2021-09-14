@@ -27,4 +27,5 @@
     <li>"dotenv": "^10.0.0"</li>
     <li>"jsonwebtoken": "^8.5.1"</li>
     <li>"http-errors": "^1.8.0"</li>
+    <li>"mongoose": "^6.0.4"</li>
 </ul>
