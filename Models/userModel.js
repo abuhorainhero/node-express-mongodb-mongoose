@@ -6,15 +6,23 @@ const userSchema = new Schema(
     userName: {
       type: String,
       required: true,
+      trim: true,
+    },
+    email: {
+      type: String,
+      require: true,
+      trim: true,
     },
     number: {
       type: Number,
       required: true,
       unique: true,
+      trim: true,
     },
     password: {
       type: String,
       required: true,
+      trim: true,
     },
     rules: {
       type: Boolean,
@@ -22,6 +30,7 @@ const userSchema = new Schema(
     },
     status: {
       type: String,
+      trim: true,
       enum: ["Active", "inactive"],
       default: "Active",
     },
@@ -29,6 +38,7 @@ const userSchema = new Schema(
       {
         type: mongoose.Types.ObjectId,
         ref: "Product",
+        trim: true,
       },
     ],
   },
