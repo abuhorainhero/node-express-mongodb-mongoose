@@ -9,11 +9,13 @@ const {
   deleteProduct,
 } = require("../Controllers/productController");
 const checkLogin = require("../Middlewares/common/checkLogin");
+const imageUpload = require("../Middlewares/product/imageUpload");
 
-router.post("/", checkLogin, createProduct);
-router.get("/", readProduct);
-router.get("/:type", getTypes);
-router.put("/:id", checkLogin, updateProduct);
-router.delete("/:id", deleteProduct);
+router
+  .post("/", checkLogin, imageUpload, createProduct)
+  .get("/", readProduct)
+  .get("/:type", getTypes)
+  .put("/:id", checkLogin, updateProduct)
+  .delete("/:id", checkLogin, deleteProduct);
 
 module.exports = router;

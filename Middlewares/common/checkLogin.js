@@ -3,6 +3,9 @@ const jwt = require("jsonwebtoken");
 const checkLogin = async (req, res, next) => {
   try {
     const { authorization } = req.headers;
+    if (!authorization) {
+      next(new Error("Invalid authorization"));
+    }
     const token = authorization.split(" ")[1];
     const decoded = await jwt.verify(token, process.env.SECRET);
     const { userName, userId } = decoded;

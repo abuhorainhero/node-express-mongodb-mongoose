@@ -11,11 +11,6 @@ const userSchema = new Schema(
     email: {
       type: String,
       require: true,
-      trim: true,
-    },
-    number: {
-      type: Number,
-      required: true,
       unique: true,
       trim: true,
     },
@@ -24,9 +19,14 @@ const userSchema = new Schema(
       required: true,
       trim: true,
     },
+    role: {
+      type: String,
+      enum: ["admin", "user"],
+      default: "user",
+    },
     rules: {
       type: Boolean,
-      required: true,
+      default: true,
     },
     status: {
       type: String,
@@ -38,7 +38,6 @@ const userSchema = new Schema(
       {
         type: mongoose.Types.ObjectId,
         ref: "Product",
-        trim: true,
       },
     ],
   },
@@ -48,6 +47,6 @@ const userSchema = new Schema(
   }
 );
 
-const user = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
-module.exports = user;
+module.exports = User;

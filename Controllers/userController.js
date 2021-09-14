@@ -24,7 +24,7 @@ const signUp = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    const user = await User.findOne({ number: req.body.number });
+    const user = await User.findOne({ email: req.body.email });
     const validPassword = await bcrypt.compare(
       req.body.password,
       user.password
@@ -40,7 +40,7 @@ const login = async (req, res, next) => {
       },
       process.env.SECRET,
       {
-        expiresIn: "5m",
+        expiresIn: process.env.JWT_EXPIRES,
       }
     );
 

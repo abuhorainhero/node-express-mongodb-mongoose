@@ -1,9 +1,9 @@
 // External imports
 const express = require("express");
 const http = require("http");
+const path = require("path");
 
 // internal imports
-// require("./Models/testModel");
 require("dotenv").config();
 require("./db/db");
 const productRouter = require("./Routers/productRoute");
@@ -15,9 +15,13 @@ const {
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 const PORT = 5000;
 
-// http.createServer(app);
+// Set Static Folder
+app.use(express.static(path.join(__dirname, "public")));
+
+const server = http.createServer(app);
 
 app.get("/", (req, res) => {
   res.send("Hello Mongoose");
@@ -31,6 +35,6 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 // application Listener
-app.listen(process.env.PORT || PORT, () => {
+server.listen(process.env.PORT || PORT, () => {
   console.log(`Server is running on port ${process.env.PORT || PORT}`);
 });

@@ -1,10 +1,17 @@
-const Product = require("../Models/projectModel");
+const Product = require("../Models/productModel");
 const User = require("../Models/userModel");
+const path = require("path");
+const { unlink } = require("fs");
 
-async function createProduct(req, res, next) {
+const createProduct = async (req, res, next) => {
   try {
-    console.log(req.body);
-    const product = await Product.create({ ...req.body, user: req.userId });
+    let info;
+    if (req.files && req.files.length > 0) {
+      info = { ...req.body, image: req.files[0].filename };
+    } else {
+      info = { ...req.body };
+    }
+    const product = await Product.create(info);
     await User.findByIdAndUpdate(
       { _id: req.userId },
       {
@@ -20,7 +27,7 @@ async function createProduct(req, res, next) {
   } catch (error) {
     next(error);
   }
-}
+};
 
 async function readProduct(req, res, next) {
   try {
@@ -69,7 +76,16 @@ const updateProduct = async (req, res, next) => {
 
 const deleteProduct = async (req, res, next) => {
   try {
-    const product = await Product.deleteOne({ _id: req.params.id });
+    const product = await Product.findByIdAndDelete({ _id: req.params.id });
+
+    // remove deleted product image
+    if (product.image) {
+      unlink(
+        path.join(__dirname, `/../public/images/${product.image}`),
+        (err) => console.log(err)
+      );
+    }
+
     res.status(200).json({ data: product, message: `Update Successfully!` });
   } catch (error) {
     next(error);
