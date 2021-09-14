@@ -4,8 +4,11 @@
     This Project is Simple Backend API (Application Programming Interface) System && Added Database MongoDB.
     MongoDB Integration Mongoose.
     && Database Table/Document Relationship using Mongoose Methods.
-
     It's mainly I trying Integration Database Relationship.
+
+    yarn install
+
+    yarn start
 
 </p>
 
